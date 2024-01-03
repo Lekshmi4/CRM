@@ -55,6 +55,18 @@ public static Object[][] getDataFromExcel(String filePath, String sheetName) thr
 		return value;
 	}
 
+	public static String getDataFromExcel(String filePath, String sheetName, int rownum, int coloumnnum ) throws InvalidFormatException, IOException
+	{
+		String data = "";
+		FileInputStream inputStream = new FileInputStream(new File(filePath));
+		Workbook wb = WorkbookFactory.create(inputStream);
+		Sheet s = wb.getSheet(sheetName);
 
+		if (!getCellValue(s, 0, coloumnnum).equals("")) {
+			data = getCellValue(s, rownum, coloumnnum);
+		}
+
+		return data;
+	}
 
 }
