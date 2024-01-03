@@ -71,7 +71,6 @@ public String addItem(String title1,String description1,String unitvalue,String 
 	 closepopup.click();
 	 wait.waitClick(items);
 	 search.sendKeys(title1);
-	// String actual=search(title1);
 	 String actual=itemname.getText();
 	 return actual;
 }
@@ -80,7 +79,7 @@ public String editItem(String editedvalue,String name1)
 {
 	  itemClick();
 	  wait.waitClick(search);
-	  search(name1);
+	  search.sendKeys(name1);
 	  wait.waitClick(edit);
 	  edit.click();
 	  wait.waitClick(title);
@@ -100,7 +99,7 @@ public String deleteItem(String editedvalue )
 {
 	  itemClick();
 	  wait.waitClick(search);
-	  search(editedvalue);
+	  search.sendKeys(editedvalue);
 	  wait.waitClick(delete);
 	  delete.click();
       wait.waitClick(dltclose);
@@ -118,25 +117,6 @@ public String searchItem(String value )
     return actual3;
 }
 
-public String search(String searchvalue)
-{
-	
-		  wait.waitClick(search);
-		  elementutil.clearAndSend(search,searchvalue);
-		  By locator=By.xpath("//table[@id='item-table']//tbody//tr//td//a[contains(text(),'"+searchvalue+"')]");
-		  wait.waitforvisible( locator);
-		  List<WebElement> itemtable=driver.findElements(By.xpath("//table[@id='item-table']//tbody//tr//td[1]"));
-		  wait.waitforvisible(itemtable);
-		  int row=elementutil.getTableDataRowCount(itemtable, searchvalue);
-		  String actualmsg="";
-			if(row!=0) 
-			{
-				WebElement tableRow=driver.findElement(By.xpath("//table[@id='item-table']//tbody//tr["+row+"]//td[1]"));
-				actualmsg=tableRow.getText();
-				System.out.println("Searched Element : " +actualmsg);
-			}
-			return actualmsg;
-    }
 
 
 public void itemClick()
